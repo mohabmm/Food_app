@@ -16,4 +16,7 @@ void setupLocator() {
 
   //Important note:
   //If there will only ever be one that never gets disposed then a singleton. If not then a factory
+
+//  why you should use this: if the creation of this instance is expensive, then this design pattern essentially delegates the expensive
+//  computation for when it is needed, rather than when the outer class, Singleton in your case, is first accessed.
 }
