@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_app_p3_start/service_locator.dart';
 import 'package:food_app_p3_start/ui/views/home_view.dart';
 
+
 void main() {
   setupLocator();
   runApp(MyApp());
@@ -28,5 +29,3 @@ class MyApp extends StatelessWidget {
 //Shared: Contains files used in multiple other UI files
 //Views: Contains the files for the app views
 //Widgets: Contains widget files that are too big to keep in the view files.
-
-//In software engineering, a design pattern is a general repeatable solution to a commonly occurring problem in software design
