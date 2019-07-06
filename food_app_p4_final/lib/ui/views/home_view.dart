@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:foodaapp/core/enums/viewstate.dart';
-import 'package:foodaapp/core/services/firebase_service.dart';
 import 'package:foodaapp/core/viewmodels/home_view_model.dart';
+import 'package:foodaapp/core/viewmodels/menu_item_view_model.dart';
 
 import '../../service_locator.dart';
 import 'base_widget.dart';
@@ -95,8 +95,13 @@ class HomeView extends StatelessWidget {
 
           return GestureDetector(
             onTap: () {
-              FirebaseService _firebaseService = locator<FirebaseService>();
-              _firebaseService.getmenuitems(menuid: index.toString());
+//              FirebaseService _firebaseService = locator<FirebaseService>();
+//              _firebaseService.getmenuitems(menuid: index.toString());
+
+              MenuItemViewModel menuitemviewmodel =
+                  locator<MenuItemViewModel>();
+
+              menuitemviewmodel.getmenuitemsmodel(menuid: index.toString());
 
               Navigator.pushNamed(context, 'menudetails');
             },

@@ -4,6 +4,7 @@ import 'package:foodaapp/core/enums/viewstate.dart';
 import 'package:foodaapp/core/models/menuitems.dart';
 import 'package:foodaapp/core/services/firebase_service.dart';
 import 'package:foodaapp/service_locator.dart';
+import 'package:meta/meta.dart';
 
 import 'base_model.dart';
 
@@ -28,9 +29,13 @@ class MenuItemViewModel extends BaseModel {
         "dispose function  of menu item view model is called after cancel is called finallly");
   }
 
+  void getmenuitemsmodel({@required String menuid}) {
+    _firebaseService.getmenuitems(menuid: menuid);
+  }
+
   void _onStatsUp(List<MenuItems> menus) {
     print(
-        "isnide the function of menu item view model to gets stats after the constructor");
+        "inside the function of menu item view model to gets stats after the constructor");
     menu = menus;
 
     if (menu == null) {

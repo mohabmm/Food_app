@@ -6,7 +6,6 @@ import 'package:foodaapp/core/models/menuitems.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
-
 class FirebaseService {
   StreamController<List<Category>> categoryController =
       StreamController<List<Category>>();
@@ -14,11 +13,11 @@ class FirebaseService {
 //   the BehaviorSubject also sends the very last event
 //  that was emitted to the listener that just subscribed
   StreamController<List<MenuItems>> menuItemsController = new BehaviorSubject();
-  Stream<List<Category>> get categoryFood => categoryController.stream;
   Stream<List<MenuItems>> get menuItems => menuItemsController.stream;
+  Stream<List<Category>> get categoryFood => categoryController.stream;
 
   FirebaseService() {
-    // used to call the main collection food caegory
+    // used to call the main collection food category
     Firestore.instance
         .collection('Category')
         .snapshots()
@@ -31,10 +30,10 @@ class FirebaseService {
         .where('MenuId', isEqualTo: int.parse(menuid))
         .snapshots()
         .listen(_menuitemsUpdated);
-    print("a7a get meny item updated called");
   }
 
   void _menuitemsUpdated(QuerySnapshot snapshot) {
+    // used to get the list of menu items from snapshot
     var item = _getMenuFromSnapshot(snapshot);
 
     menuItemsController.add(item);
@@ -62,7 +61,7 @@ class FirebaseService {
     return menuItems;
   }
 
-  // Helper function that Converts a QuerySnapshot into a List<Stats>
+  // Helper function that Converts a QuerySnapshot into a List<Category>
   List<Category> _getCategoryFromSnapshot(QuerySnapshot snapShot) {
     var categoryItems = List<Category>();
     var documents = snapShot.documents;
