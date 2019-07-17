@@ -1,3 +1,3 @@
-# foodaapp
+# foodApp
 
 Menu Details
