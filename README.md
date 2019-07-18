@@ -7,17 +7,17 @@ new app code parts.
  
 App code Partioning :
 
-part 2 : We are reading data from our firestore database using stream builder.
+Part 2 : We are reading data from our firestore database using stream builder.
 
-part 3_start : Skeleton  of the Architecture  that we will use in our app.
+Part 3_start : Skeleton  of the Architecture  that we will use in our app.
 
-part 3_final : Reading the data of the home page from firestore after adding code good Architecture.
+Part 3_final : Reading the data of the home page from firestore after adding code Architecture .
 
-part 4: Add food in each of the food categories found in the home page.
+Part 4: Add food in each of the food categories found in the home page.
 
-part 5: Add food details for each food (describtion , image, name).
+Part 5: Add food details for each food (describtion , image, name).
 
-part6 : Add adding to cart functionality (Sqlite database), modify item price, modify item quantity, add/remove items to cart list and update the total item price.
+Part 6 : Add adding to cart functionality (Sqlite database), modify item price, modify item quantity, add/remove items to cart list and update the total item price.
 
 
 
