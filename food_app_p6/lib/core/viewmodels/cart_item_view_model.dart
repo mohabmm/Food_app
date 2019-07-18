@@ -13,48 +13,47 @@ class CartItemViewModel extends BaseModel {
   List<Food> food;
   StreamSubscription subscription;
 
-  @override
-  void dispose() {
-    print("dispose function is called");
-    try {
-      subscription.cancel();
-      print("dispose function is called after cancel is called");
-    } catch (exception, stackTrace) {
-      print("the exception is " + exception.toString());
-    } finally {
-      super.dispose();
-    }
-  }
-
   CartItemViewModel() {
     subscription = _firebaseService.foods.listen(_onfoodupdated);
     print("constructor home view model");
   }
 
-  calulateTotalFoodPrices(var price) {
-    int sum;
-    for (int i = 0; i < price.length; i++) {
-      sum += price[i];
-    }
-
-    print("total price is " + sum.toString());
-    notifyListeners();
-    return sum;
-  }
+  int _totalprice = 0;
+  int get totalprice => _totalprice;
 
   void _onfoodupdated(List<Food> foods) {
     print(
-        "inside the function of home view model to get stats after constructor ");
+        "inside the the cart item model function of home view model to get stats after constructor ");
     food = foods; // Set the stats for the UI
 
     if (food == null) {
+      print("the food  the cart item modelis null so the state hs error");
       setState(ViewState.Error); // If null indicate we're still fetching
     } else if (food.length == null || food.length == 0) {
+      print(
+          "the food  the cart item model length is  0 or the food length is null ");
       setState(ViewState.NoDataAvailable);
     } else if (foods.length == 0) {
+      print("the food the cart item model  length is 0");
       setState(ViewState.Error);
     } else {
+      print("the data of the cart item model is fetched");
       setState(ViewState.DataFetched);
+    }
+  }
+
+  calulateTotalFoodPrices() {
+    print("the current food length is " + food.length.toString());
+    _totalprice = 0;
+    if (food != null) {
+      for (int i = 0; i < food.length; i++) {
+        _totalprice += food[i].price;
+      }
+      if (food.length == 0) {
+        _totalprice = 0;
+      }
+      notifyListeners();
+      return _totalprice ?? 0;
     }
   }
 }

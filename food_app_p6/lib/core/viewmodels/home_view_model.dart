@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:foodaapp/core/enums/viewstate.dart';
+import 'package:foodaapp/core/models/FoodModel.dart';
 import 'package:foodaapp/core/models/category.dart';
 import 'package:foodaapp/core/services/firebase_service.dart';
 import 'package:foodaapp/service_locator.dart';
@@ -9,6 +10,7 @@ import 'base_model.dart';
 
 class HomeViewModel extends BaseModel {
   FirebaseService _firebaseService = locator<FirebaseService>();
+  List<Food> food;
 
   List<Category> category;
   StreamSubscription subscription;
@@ -28,6 +30,7 @@ class HomeViewModel extends BaseModel {
 
   HomeViewModel() {
     subscription = _firebaseService.categoryFood.listen(_onStatsUpdateds);
+    // _firebaseService.foods.listen(_onfoodupdated);
     print("constructor home view model");
   }
 

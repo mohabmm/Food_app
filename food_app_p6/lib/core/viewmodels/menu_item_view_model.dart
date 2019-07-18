@@ -36,7 +36,7 @@ class MenuItemViewModel extends BaseModel {
     _firebaseService.getmenuitems(menuid: menuid);
   }
 
-  int _count = 0;
+  int _count = 1;
   int get count => _count;
 
   void increment() {

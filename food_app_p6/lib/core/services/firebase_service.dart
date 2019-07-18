@@ -39,7 +39,7 @@ class FirebaseService {
         .snapshots()
         .listen(_feedbackAdded);
 
-//    getFoods();
+    getFoods();
   }
 
   void getmenuitems({@required String menuid}) {
@@ -94,7 +94,7 @@ class FirebaseService {
   }
 
   getFoods() async {
-    _foodSubject.sink.add(await DBProvider.db.getAllFoods());
+    _foodSubject.add(await DBProvider.db.getAllFoods());
   }
 
   delete(int id) {

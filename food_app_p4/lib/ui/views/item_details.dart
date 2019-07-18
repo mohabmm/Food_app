@@ -1,38 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:foodaapp/core/models/FoodModel.dart';
 import 'package:foodaapp/core/models/menuitems.dart';
-import 'package:foodaapp/core/services/firebase_service.dart';
-import 'package:foodaapp/core/viewmodels/cart_item_view_model.dart';
-import 'package:foodaapp/core/viewmodels/menu_item_view_model.dart';
-
-import '../../service_locator.dart';
-import 'base_widget.dart';
 
 class ItemDetails extends StatelessWidget {
-  MenuItems menuitems;
-  ItemDetails({this.menuitems});
+  MenuItems menuItemViewModel;
+  ItemDetails({this.menuItemViewModel});
   @override
   Widget build(BuildContext context) {
-    return BaseWidget<MenuItemViewModel>(
-        model: MenuItemViewModel(),
-        builder: (
-          context,
-          model,
-          child,
-        ) =>
-            Scaffold(
-                backgroundColor: Theme.of(context).backgroundColor,
-                body: _getBodyUil(context, model)));
-  }
+//    final CartBloc cartBloc = BlocProvider.of<CartBloc>(context);
 
-  Widget _getBodyUil(BuildContext context, MenuItemViewModel model) {
-    print("get body UI OF THE HOME VIEW ");
+//    int ids = int.parse(id);
 
-    return _getListUi(model);
-  }
-
-  Widget _getListUi(MenuItemViewModel model) {
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -43,14 +20,14 @@ class ItemDetails extends StatelessWidget {
               pinned: true,
               flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
-                  title: Text(menuitems.Name,
+                  title: Text(menuItemViewModel.Name,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
                       )),
                   collapseMode: CollapseMode.parallax,
                   background: Image.network(
-                    menuitems.Image,
+                    menuItemViewModel.Image,
                     fit: BoxFit.cover,
                   )),
             ),
@@ -75,7 +52,7 @@ class ItemDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           new Text(
-                            menuitems.Name,
+                            menuItemViewModel.Name,
                             style: TextStyle(color: Colors.red),
                           ),
                           Padding(
@@ -94,10 +71,7 @@ class ItemDetails extends StatelessWidget {
                                   width: 14.0,
                                 ),
                                 new Text(
-                                  model
-                                      .calculateTotalPrice(model.count,
-                                          int.parse(menuitems.Price))
-                                      .toString(),
+                                  menuItemViewModel.Price,
                                   style: TextStyle(color: Colors.black),
                                 ),
                               ],
@@ -114,14 +88,16 @@ class ItemDetails extends StatelessWidget {
                                 children: <Widget>[
                                   new IconButton(
                                       icon: new Icon(Icons.minimize),
-                                      onPressed: () {
-                                        model.decrement();
-                                      }),
-                                  new Text('${model.count}'),
+                                      onPressed: () {}),
+                                  new Text("0"),
                                   new IconButton(
                                       icon: new Icon(Icons.add),
                                       onPressed: () {
-                                        model.increment();
+//                                        Navigator.push(
+//                                            context,
+//                                            MaterialPageRoute(
+//                                                builder: (context) =>
+//                                                    CartItems()));
                                       }),
                                 ],
                               ),
@@ -132,7 +108,8 @@ class ItemDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                (menuitems.Description != null && menuitems.Description != "")
+                (menuItemViewModel.Description != null &&
+                        menuItemViewModel.Description != "")
                     ? Container(
                         height: 70.0,
                         width: double.infinity,
@@ -141,7 +118,7 @@ class ItemDetails extends StatelessWidget {
                             padding: const EdgeInsets.all(12.0),
                             child: Center(
                               child: new Text(
-                                menuitems.Description,
+                                menuItemViewModel.Description,
                                 style: TextStyle(color: Colors.red),
                               ),
                             ),
@@ -156,38 +133,9 @@ class ItemDetails extends StatelessWidget {
       ),
       floatingActionButton: new FloatingActionButton(
         onPressed: () {
-//          calulateTotalFoodPrices
-          FirebaseService firebaseservice = locator<FirebaseService>();
-
-          Food food = new Food(
-            id: int.parse(menuitems.Id),
-            foodName: menuitems.Name,
-            price: model.calculateTotalPrice(
-                model.count, int.parse(menuitems.Price)),
-//              total: model.calculateTotalPrice(
-//                  model.count, int.parse(menuitems.Price))
-          );
-          firebaseservice.add(food);
-//          List<int> listprice;
-//          print("the value of the total price added is " +
-//              model
-//                  .calculateTotalPrice(model.count, int.parse(menuitems.Price))
-//                  .toString());
-//          listprice.add(model.calculateTotalPrice(
-//              model.count, int.parse(menuitems.Price)));
-
-//          CartItemViewModel cartItemViewModel = locator<CartItemViewModel>();
-
-//          cartItemViewModel.calulateTotalFoodPrices(listprice);
-          print("food added ");
-          Fluttertoast.showToast(
-              msg: "food added ",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIos: 1,
-              backgroundColor: Colors.grey,
-              textColor: Colors.white,
-              fontSize: 16.0);
+//          Food food = new Food(
+//              id: ids, foodName: name, price: int.parse(price), total: 0);
+//          cartBloc.add(food);
         },
         child: new Icon(
           Icons.shopping_cart,

@@ -86,7 +86,7 @@ class MenuDetails extends StatelessWidget {
     }
   }
 
-  Widget _getListUi(MenuItemViewModel model, BuildContext contextl) {
+  Widget _getListUi(MenuItemViewModel model, BuildContext context) {
     return new ListView.builder(
         itemExtent: 220.0,
         itemCount: model.menu.length,
@@ -94,18 +94,24 @@ class MenuDetails extends StatelessWidget {
           String image = model.menu[index].Image;
           String name = model.menu[index].Name;
 
-          return Column(
-            children: <Widget>[
-              new Image.network(
-                image,
-                fit: BoxFit.fill,
-                height: 201.0,
-                width: double.infinity,
-              ),
-              new Text(
-                name,
-              ),
-            ],
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, 'itemdetails',
+                  arguments: model.menu[index]);
+            },
+            child: Column(
+              children: <Widget>[
+                new Image.network(
+                  image,
+                  fit: BoxFit.fill,
+                  height: 201.0,
+                  width: double.infinity,
+                ),
+                new Text(
+                  name,
+                ),
+              ],
+            ),
           );
         });
   }

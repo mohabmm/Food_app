@@ -87,67 +87,69 @@ class CartItems extends StatelessWidget {
 }
 
 Widget _getListUi(CartItemViewModel model) {
-//    final CartBloc cartBloc = BlocProvider.of<CartBloc>(context);
-  int total = 3;
-
+  ;
   FirebaseService firebaseservice = locator<FirebaseService>();
 
   return new Scaffold(
-    floatingActionButton: new RawMaterialButton(
-        child: new Icon(Icons.shopping_cart),
-        onPressed: () {
-          firebaseservice.deleteAll();
-        }),
-    appBar: new AppBar(
-      title: new Text('Cart'),
-    ),
-    body: Column(
-      children: <Widget>[
-        Container(
-          height: 450.0,
-          child: ListView.builder(
-            itemCount: model.food.length,
-            itemBuilder: (BuildContext context, int index) {
-              Food item = model.food[index];
-//              var list;
-//              list.add(item.price);
-//              model.calulateTotalFoodPrices(list);
-//              total = item.total;
-              return Dismissible(
-                key: UniqueKey(),
-                background: Container(color: Colors.red),
-                onDismissed: (direction) {
-                  firebaseservice.delete(item.id);
-                },
-                child: ListTile(
-                  title: Card(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(item.foodName,
-                            style: TextStyle(color: Colors.red)),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Text(item.price.toString(),
-                              style: TextStyle(color: Colors.red)),
+      floatingActionButton: new RawMaterialButton(
+          child: new Icon(Icons.shopping_cart),
+          onPressed: () {
+            firebaseservice.deleteAll();
+          }),
+      appBar: new AppBar(
+        title: new Text('Cart'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: 450.0,
+            child: ListView.builder(
+              itemCount: model.food.length,
+              itemBuilder: (BuildContext context, int index) {
+                Food item = model.food[index];
+                int onetypeproductprice = item.price;
+                return Dismissible(
+                  key: UniqueKey(),
+                  background: Container(color: Colors.red),
+                  onDismissed: (direction) {
+                    firebaseservice.delete(item.id);
+                  },
+                  child: Column(
+                    children: <Widget>[
+                      ListTile(
+                        title: Card(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(item.foodName,
+                                  style: TextStyle(color: Colors.red)),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(onetypeproductprice.toString(),
+                                        style: TextStyle(color: Colors.red)),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-        new Container(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 12.0),
-            child: new Text(total.toString(),
-                style: TextStyle(fontSize: 40.0, color: Colors.greenAccent)),
+          new Container(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: new Text(model.calulateTotalFoodPrices().toString(),
+                  style: TextStyle(fontSize: 40.0, color: Colors.greenAccent)),
+            ),
           ),
-        )
-      ],
-    ),
-  );
+        ],
+      ));
 }
