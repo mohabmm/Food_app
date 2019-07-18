@@ -25,3 +25,6 @@ Part 6 : Add adding to cart functionality (Sqlite database), modify item price, 
 ![Screenshot_1563455180](https://user-images.githubusercontent.com/29692898/61460846-ddd99900-a96f-11e9-9bf6-03dcc14765f1.png)
 ![Screenshot_1563455193](https://user-images.githubusercontent.com/29692898/61460850-df0ac600-a96f-11e9-85de-416ed79fed0f.png)
 ![Screenshot_1563456222](https://user-images.githubusercontent.com/29692898/61461110-58a2b400-a970-11e9-8a5b-aa5686161216.png)
+![Food](https://user-images.githubusercontent.com/29692898/61464194-27c57d80-a976-11e9-8e9a-0282da54db5e.png)
+![Category](https://user-images.githubusercontent.com/29692898/61464196-285e1400-a976-11e9-8352-b61098786033.png)
+
